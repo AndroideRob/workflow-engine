@@ -30,6 +30,7 @@ dependencies {
 
     // library
     implementation(project(":workflow"))
+    // implementation("com.AndroideRob.workflow-engine:workflow:0.0.2")
 
     // ktor
     implementation("io.ktor:ktor-server-core:$ktorVersion")
@@ -65,4 +66,12 @@ repositories {
     mavenCentral()
     maven("https://plugins.gradle.org/m2/")
     maven("https://kotlin.bintray.com/ktor")
+
+//    maven("https://maven.pkg.github.com/AndroideRob/workflow-engine") {
+//        name = "workflow-engine"
+//        credentials {
+//            username = "AndroideRob"
+//            password = "e5ee14408998cb29efda02de7e131bc9f965a0fa"
+//        }
+//    }
 }

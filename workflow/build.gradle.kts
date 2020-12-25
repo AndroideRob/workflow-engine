@@ -60,9 +60,8 @@ repositories {
 publishing {
     repositories {
         maven {
-            name = "workflow-engine"
+            name = "GithubPackages"
             url = uri("https://maven.pkg.github.com/AndroideRob/workflow-engine")
-            version = "0.0.2"
             credentials {
                 username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
                 password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
@@ -72,6 +71,9 @@ publishing {
     publications {
         register<MavenPublication>("gpr") {
             from(components["java"])
+            groupId = "com.robkonarski.workflow"
+            artifactId = "engine"
+            version = "0.0.3"
         }
     }
 }
