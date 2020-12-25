@@ -3,6 +3,7 @@
 A library adding workflow orchestration capability to your JVM applications. 
 It is completely decentralized, just connect your database and give it a go.
 
+
 ### Main benefits
 - Decentralized - just a library to include in your service
 - Fault-tolerant - at-least-once execution guarantees
@@ -10,7 +11,8 @@ It is completely decentralized, just connect your database and give it a go.
 - Flexible - can be configured to efficiently process a large number of small workflows, or a small number of heavy workflows
 - Scalable - horizontal scalability by sharding tables (coming soon)
 
-### How to run
+
+### How to run an example
 
 #### H2
 - Run the `main()` method inside `Application.kt` to start the service
