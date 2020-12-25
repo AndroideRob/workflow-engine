@@ -62,7 +62,7 @@ publishing {
         maven {
             name = "workflow-engine"
             url = uri("https://maven.pkg.github.com/AndroideRob/workflow-engine")
-            version = "0.0.1"
+            version = "0.0.2"
             credentials {
                 username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
                 password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
