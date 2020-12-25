@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - vol-postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  mysql:
+    image: mysql:8
+    volumes:
+      - vol-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+volumes:
+  vol-postgres-data:
+  vol-mysql-data:
