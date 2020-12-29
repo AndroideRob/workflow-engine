@@ -44,7 +44,7 @@ internal class WorkflowEngineImpl @JvmOverloads constructor(
             config = databaseConfig,
             desiredParallelism = engineConfig.workers,
             schemas = listOf(table, migrationsTable),
-            migrationService = MigrationService(migrationsRepo, engineLogger),
+            migrationService = MigrationService(migrationsRepo, engineLogger, databaseConfig),
             logger = databaseLogger,
             additionalHikariConfig = additionalHikariConfig
         )
