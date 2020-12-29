@@ -1,8 +1,7 @@
 ### Todo MVP:
 - setup github actions for CI/CD:
-  - tests
-  - releases
   - code coverage
+  - end-to-end tests with all supported databases
 
 ### Todo Later:
 - perform workflow I/O validation
