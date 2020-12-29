@@ -17,6 +17,7 @@ plugins {
     kotlin("jvm")
     `maven-publish`
     id("com.jfrog.bintray") version "1.8.4"
+    jacoco
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_1_8
