@@ -1,9 +1,14 @@
 package com.robkonarski.workflow.migration
 
+import com.robkonarski.workflow.DatabaseConfig
 import org.jetbrains.exposed.sql.Transaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
-internal class MigrationService(private val repo: MigrationsRepository, private val logger: (String) -> Unit) {
+internal class MigrationService(
+    private val repo: MigrationsRepository,
+    private val logger: (String) -> Unit,
+    private val database: DatabaseConfig
+) {
 
     private val scripts = arrayOf<MigrationScript>(
         _1()
@@ -34,7 +39,12 @@ internal class MigrationService(private val repo: MigrationsRepository, private 
         scripts.forEach { script ->
             logger("applying migration script version: ${script.version}")
 
-            script.run(this)
+            when (database) {
+                is DatabaseConfig.Mysql -> script.mysql(this)
+                is DatabaseConfig.Postgres -> script.postgres(this)
+                is DatabaseConfig.H2 -> script.h2(this)
+            }
+
             repo.update(migration.id, migration.copy(version = script.version))
 
             logger("migration script applied. Current database version: ${script.version}")
