@@ -24,6 +24,23 @@ It is completely decentralized, just connect your database and give it a go.
 - call `localhost/demo` and have fun looking at the database
 
 
+### How to import an artifact
+Artifacts are publicly available on [Bintray Maven Repo](https://bintray.com/androiderob/workflow-engine/engine#).
+
+#### Gradle
+```
+# build.gradle.kts
+
+repositories {
+    maven("https://dl.bintray.com/androiderob/workflow-engine")
+}
+
+dependencies {
+    implementation("com.robkonarski.workflow:engine:0.0.5")
+}
+```
+
+
 ### Activity requirements/recommendations
 - Activities must be immutable - their inputs/outputs must not change
 - Activities should be idempotent - since we can only provide at-least-once delivery guarantees

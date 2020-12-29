@@ -16,9 +16,20 @@ val mockkVersion by extra("1.10.2")
 plugins {
     kotlin("jvm")
     `maven-publish`
+    id("com.jfrog.bintray") version "1.8.4"
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+val artifactGroup = "com.robkonarski.workflow"
+val artifactName = "engine"
+val artifactVersion = "0.0.5"
+val artifactRepo = "workflow-engine"
+
+val sourcesJar by tasks.creating(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.getByName("main").allSource)
+}
 
 dependencies {
     implementation(kotlin("stdlib"))
@@ -58,22 +69,30 @@ repositories {
 }
 
 publishing {
-    repositories {
-        maven {
-            name = "GithubPackages"
-            url = uri("https://maven.pkg.github.com/AndroideRob/workflow-engine")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
-            }
+    publications {
+        register<MavenPublication>(artifactRepo) {
+            from(components["java"])
+            artifact(sourcesJar)
+            groupId = artifactGroup
+            artifactId = artifactName
+            version = artifactVersion
         }
     }
-    publications {
-        register<MavenPublication>("gpr") {
-            from(components["java"])
-            groupId = "com.robkonarski.workflow"
-            artifactId = "engine"
-            version = "0.0.3"
+}
+
+bintray {
+    user = project.findProperty("bintray.user") as String? ?: System.getenv("BINTRAY_USER")
+    key = project.findProperty("bintray.key") as String? ?: System.getenv("BINTRAY_API_KEY")
+    setPublications(artifactRepo)
+    publish = true
+
+    pkg.apply {
+        repo = artifactRepo
+        name = artifactName
+        setLicenses("Apache-2.0")
+        vcsUrl = "https://github.com/AndroideRob/workflow-engine"
+        version.apply {
+            name = artifactVersion
         }
     }
 }

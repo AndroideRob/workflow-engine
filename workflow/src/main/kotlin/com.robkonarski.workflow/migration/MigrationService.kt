@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 internal class MigrationService(
     private val repo: MigrationsRepository,
     private val logger: (String) -> Unit,
-    private val database: DatabaseConfig
+    private val databaseConfig: DatabaseConfig
 ) {
 
     private val scripts = arrayOf<MigrationScript>(
@@ -39,7 +39,7 @@ internal class MigrationService(
         scripts.forEach { script ->
             logger("applying migration script version: ${script.version}")
 
-            when (database) {
+            when (databaseConfig) {
                 is DatabaseConfig.Mysql -> script.mysql(this)
                 is DatabaseConfig.Postgres -> script.postgres(this)
                 is DatabaseConfig.H2 -> script.h2(this)

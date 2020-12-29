@@ -20,7 +20,7 @@ jobs:
       - name: Build
         run: ./gradlew clean build
       - name: Publish to GitHub Packages
-        run: ./gradlew publish
+        run: ./gradlew bintrayUpload
         env:
-          USERNAME: ${{ github.actor }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BINTRAY_USER: androiderob
+          BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
