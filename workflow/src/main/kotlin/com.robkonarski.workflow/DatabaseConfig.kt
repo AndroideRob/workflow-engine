@@ -37,6 +37,19 @@ sealed class DatabaseConfig(
 
     /**
      * @param maxConnections Defaults to 10.
+     * @param transactionIsolation Defaults to "SERIALIZABLE"
+     */
+    class Oracle @JvmOverloads constructor(
+        url: String,
+        user: String,
+        password: String,
+        tablePrefix: String,
+        maxConnections: Int = 10,
+        transactionIsolation: String = "SERIALIZABLE"
+    ) : DatabaseConfig(url, user, password, tablePrefix, maxConnections, transactionIsolation)
+
+    /**
+     * @param maxConnections Defaults to 10.
      * @param transactionIsolation Defaults to "TRANSACTION_REPEATABLE_READ"
      * @param clearDatabase Used to clear the H2 database upon connection. Used for testing.
      */

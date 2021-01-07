@@ -2,24 +2,45 @@ version: '3.7'
 
 services:
 
-  postgres:
-    image: postgres:13-alpine
-    environment:
-      - POSTGRES_PASSWORD=postgres
-    volumes:
-      - vol-postgres-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+#  postgres:
+#    image: postgres:13-alpine
+#    environment:
+#      - POSTGRES_PASSWORD=postgres
+#    volumes:
+#      - vol-postgres-data:/var/lib/postgresql/data
+#    ports:
+#      - 5432:5432
+#
+#  mysql:
+#    image: mysql:8
+#    volumes:
+#      - vol-mysql-data:/var/lib/mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#    ports:
+#      - 3306:3306
 
-  mysql:
-    image: mysql:8
+  oracle:
+    image: daggerok/oracle:11.2.0.2-xe
+    shm_size: 1g
     volumes:
-      - vol-mysql-data:/var/lib/mysql
+      - vol-oracle-data:/u01/app/oracle/oradata
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      - ORACLE_PWD=Password123
     ports:
-      - "3306:3306"
+      - 1521:1521
+      - 8080:8080
+
+#  sqlserver:
+#    image: mcr.microsoft.com/mssql/server
+#    # todo add volume
+#    environment:
+#      SA_PASSWORD: Password123
+#      ACCEPT_EULA: Y
+#    ports:
+#      - 1433:1433
 
 volumes:
   vol-postgres-data:
   vol-mysql-data:
+  vol-oracle-data:

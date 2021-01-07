@@ -4,6 +4,7 @@ val logbackVersion by extra("1.2.3")
 val exposedVersion by extra("0.28.1")
 val postgresDriverVersion by extra("42.2.12")
 val mysqlDriverVersion by extra("8.0.15")
+val oracleDriverVersion by extra("19.9.0.0")
 val h2DriverVersion by extra("1.4.200")
 val hikariVersion by extra("3.4.5")
 val caffeineVersion by extra("2.8.5")
@@ -40,6 +41,7 @@ dependencies {
     // database
     implementation("org.postgresql:postgresql:$postgresDriverVersion")
     implementation("mysql:mysql-connector-java:$mysqlDriverVersion")
+    implementation("com.oracle.database.jdbc:ojdbc8:$oracleDriverVersion")
     implementation("com.h2database:h2:$h2DriverVersion")
     api("com.zaxxer:HikariCP:$hikariVersion")
 

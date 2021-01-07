@@ -30,6 +30,13 @@ private fun Application.mysql() = DatabaseConfig.Mysql(
     tablePrefix = ""
 )
 
+private fun Application.oracle() = DatabaseConfig.Oracle(
+    url = environment.config.property("database.oracle.url").getString(),
+    user = environment.config.property("database.oracle.user").getString(),
+    password = environment.config.property("database.oracle.password").getString(),
+    tablePrefix = ""
+)
+
 private fun Application.h2() = DatabaseConfig.H2(
     url = environment.config.property("database.h2.url").getString(),
     tablePrefix = ""
@@ -86,9 +93,10 @@ private fun GsonBuilder.build() = apply {
 }
 
 private fun Application.createEngine() = WorkflowEngine.createDefault(
-    databaseConfig = h2(),
+    //databaseConfig = h2(),
     //databaseConfig = postgres(),
     //databaseConfig = mysql(),
+    databaseConfig = oracle(),
     registeredActivities = listOf(
         JavaInputActivity(),
         JavaTerminalActivity(),

@@ -24,6 +24,7 @@ internal fun connectDatabase(
     fun DatabaseConfig.resolveDriver() = when (this) {
         is DatabaseConfig.Postgres -> "org.postgresql.Driver"
         is DatabaseConfig.Mysql -> "com.mysql.jdbc.Driver"
+        is DatabaseConfig.Oracle -> "oracle.jdbc.driver.OracleDriver"
         is DatabaseConfig.H2 -> "org.h2.Driver"
     }
 
@@ -49,6 +50,7 @@ internal fun connectDatabase(
         }
     }
 
+    // for tests
     if ((config as? DatabaseConfig.H2)?.clearDatabase == true) {
         transaction {
             SchemaUtils.drop(*schemas.toTypedArray())
